@@ -144,4 +144,8 @@ public class Measurement1ServiceImpl implements IMeasurement1Service {
     public void setHour(int hour) {
         this.hour = hour;
     }
+
+    public void deleteAll(List<Measurement1> list) {
+        repository.deleteAll(list);
+    }
 }

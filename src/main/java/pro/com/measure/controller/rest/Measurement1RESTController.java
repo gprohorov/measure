@@ -11,6 +11,7 @@ import pro.com.measure.model.Measurement1;
 import pro.com.measure.service.measurement1.impls.Measurement1ServiceImpl;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 @RequestMapping("/api/measure")
@@ -32,7 +33,16 @@ public class Measurement1RESTController {
         return service.create(m1);
     }
 
-
+    @RequestMapping("/del")
+    int delGarbage(){
+        LocalDateTime start = LocalDateTime.of(2019,10,1,0,0,0);
+        LocalDateTime finish = LocalDateTime.of(2021, Month.JANUARY,1,0,0,0);
+        List<Measurement1> list = service.getAllForThePeriod(start,finish);
+        int res = list.size();
+        service.deleteAll(list);
+        ////
+        return res;
+    }
 
     //  returns data for the given hour
     @RequestMapping(value = "/list/{year}/{month}/{day}/{hour}", method = RequestMethod.GET)
